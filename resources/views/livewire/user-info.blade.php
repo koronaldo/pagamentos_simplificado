@@ -197,7 +197,7 @@ new #[Layout('components.layouts.user-info')] class() extends Component {
 		
 
 		<!-- Submit Button -->
-		<flux:button type="submit" class="mt-4  bg-blue-500">
+		<flux:button type="submit" class="mt-4">
             {{ __('Transferir') }}
         </flux:button>
 

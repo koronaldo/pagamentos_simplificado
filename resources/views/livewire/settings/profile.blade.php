@@ -9,6 +9,10 @@ use Livewire\Volt\Component;
 new class extends Component {
     public string $name = '';
     public string $email = '';
+    public string $perfil = '';
+    public string $saldo = '';
+    public string $cpfcnpj = '';
+    
 
     /**
      * Mount the component.
@@ -17,6 +21,9 @@ new class extends Component {
     {
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
+        $this->perfil = Auth::user()->perfil;
+        $this->saldo = Auth::user()->saldo;
+        $this->cpfcnpj = Auth::user()->cpfcnpj;
     }
 
     /**
@@ -72,12 +79,28 @@ new class extends Component {
 <section class="w-full">
     @include('partials.settings-heading')
 
-    <x-settings.layout :heading="__('Profile')" :subheading="__('Update your name and email address')">
+    <x-settings.layout :heading="__('Perfil')" :subheading="__('Atualize seus dados')">
         <form wire:submit="updateProfileInformation" class="my-6 w-full space-y-6">
-            <flux:input wire:model="name" :label="__('Name')" type="text" required autofocus autocomplete="name" />
+            <flux:input wire:model="name" :label="__('Nome')" type="text" required autofocus autocomplete="name" />
 
             <div>
                 <flux:input wire:model="email" :label="__('Email')" type="email" required autocomplete="email" />
+                
+                               
+                <flux:input wire:model="saldo" :label="__('Saldo')" type="text" required autocomplete="saldo" />
+                
+                
+				<flux:input wire:model="cpfcnpj" name="cpfcnpj" x-data
+					x-init="aplicarMascara($el)" :label="__('CPF/CNPJ')" type="text"
+					required autocomplete="cpfcnpj"
+					:placeholder="__('Entre com cpf ou cnpj')" />
+
+			     <!-- Perfil -->
+				<flux:select wire:model="perfil" :label="__('Perfil')"
+					:placeholder="__('Perfil')" required>
+					<flux:select.option value="lojista">Lojista</flux:select.option>
+					<flux:select.option value="cliente">Cliente</flux:select.option>
+				</flux:select>
 
                 @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail &&! auth()->user()->hasVerifiedEmail())
                     <div>
@@ -100,7 +123,7 @@ new class extends Component {
 
             <div class="flex items-center gap-4">
                 <div class="flex items-center justify-end">
-                    <flux:button variant="primary" type="submit" class="w-full">{{ __('Save') }}</flux:button>
+                    <flux:button variant="primary" type="submit" class="w-full">{{ __('Salvar') }}</flux:button>
                 </div>
 
                 <x-action-message class="me-3" on="profile-updated">
