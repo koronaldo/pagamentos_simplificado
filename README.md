@@ -6,13 +6,23 @@ Banco Sqlite
 
 Como instalar
 
-Após bixar o projeto do git rode o comando
+Após baixar o projeto do git rode o comando
 
 php artisan migrate:fresh --seed     
 
-Para criar os usuarios de teste
+Para criar os usuários de teste ou registre novos usuário se necessário. Os usuarios tem a senha padrão 12345678
 
-O sistema permite criar novos usuário se necessário.
+1@cliente.com.br
+2@cliente.com.br
+3@cliente.com.br
+4@cliente.com.br
+
+1@lojista.com.br
+2@lojista.com.br
+3@lojista.com.br
+4@lojista.com.br
+
+Lojistas
 
 Após fazer o login o usuario terá acesso a uam tela para fazer transferência ou visualizar os 10 ulitmos movimentos realizados.
 
