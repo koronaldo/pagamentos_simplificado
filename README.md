@@ -10,7 +10,7 @@ Após baixar o projeto do git rode o comando
 
 php artisan migrate:fresh --seed     
 
-Para criar os usuários de teste ou registre novos usuário se necessário. Os usuarios tem a senha padrão 12345678
+Abaixo os usuários de testes que serão inseridos automaticamente
 
 1@cliente.com.br
 2@cliente.com.br
@@ -22,7 +22,7 @@ Para criar os usuários de teste ou registre novos usuário se necessário. Os u
 3@lojista.com.br
 4@lojista.com.br
 
-Lojistas
+Se necessario registre novos usuários
 
 Após fazer o login o usuario terá acesso a uam tela para fazer transferência ou visualizar os 10 ulitmos movimentos realizados.
 
