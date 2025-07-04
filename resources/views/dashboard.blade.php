@@ -1,18 +1,24 @@
 <x-layouts.app :title="__('Dashboard')">
-    <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-        <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
-            </div>
-            <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
-            </div>
-            <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
-            </div>
-        </div>
-        <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-            <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
-        </div>
-    </div>
+<div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
+	<div class="grid h-screen gap-1 md:grid-cols-2">
+		<!-- Primeira coluna dividida em duas partes verticalmente -->
+		<div
+			class="relative h-full overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 flex flex-col">
+			<div
+				class="flex-1 border-b border-neutral-200 dark:border-neutral-700">
+				<!-- Parte de cima -->
+				<livewire:user-info />
+			</div>
+			<div class="flex-1">
+				<livewire:user-balance />
+			</div>
+		</div>
+
+		<!-- Segunda coluna com transaction-list -->
+		<div
+			class="relative h-full overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
+			<livewire:transaction-list />
+		</div>
+	</div>
+</div>
 </x-layouts.app>
