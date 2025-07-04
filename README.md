@@ -22,6 +22,8 @@ Abaixo os usuários de testes que serão inseridos automaticamente
 3@lojista.com.br
 4@lojista.com.br
 
+Senha 12345678 para todos
+
 Se necessario registre novos usuários
 
 Após fazer o login o usuario terá acesso a uam tela para fazer transferência ou visualizar os 10 ulitmos movimentos realizados.
