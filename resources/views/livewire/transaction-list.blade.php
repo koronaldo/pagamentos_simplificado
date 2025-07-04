@@ -19,7 +19,9 @@ new #[Layout('components.layouts.transation-list')] class() extends Component {
         $this->userId = $user->id;
         $this->balance = $user->saldo;
 
-        $this->transactions = Transaction::with('receiver')-> // carrega o user do receiver_id
+        $this->transactions = Transaction::
+            with('receiver')-> // carrega o user do receiver_id
+            with('sender')-> // carrega o user do Sender_id
         where('sender_id', $user->id)
             ->orWhere('receiver_id', $user->id)
             ->orderByDesc('created_at')
@@ -70,7 +72,13 @@ new #[Layout('components.layouts.transation-list')] class() extends Component {
 						<td class="px-4 py-2 text-gray-600">{{
 							$transaction->created_at->format('d/m/Y H:i') }}</td>
 						<td class="px-4 py-2 text-gray-900">{{
-							$transaction->receiver->name ?? 'Desconhecido' }}</td>
+							$transaction->receiver_id == auth()->id() 
+        					? ($transaction->sender->name ?? 'Desconhecido') 
+        					: ($transaction->sender_id == auth()->id() 
+            				? ($transaction->receiver->name ?? 'Desconhecido') 
+            				: 'Desconhecido') 
+            				}}
+						</td>
 					</tr>
 					@empty
 					<tr>
