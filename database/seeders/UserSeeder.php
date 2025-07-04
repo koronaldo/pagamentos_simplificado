@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'cpfcnpj' => '11',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
-            'saldo' => '500'            
+            'saldo' => '1000'            
         ]);
         
         
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'cpfcnpj' => '12',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
-            'saldo' => '500'
+            'saldo' => '1000'
         ]);
         
         User::create([
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
             'cpfcnpj' => '13',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
-            'saldo' => '500'
+            'saldo' => '1000'
         ]);
         
         User::create([
@@ -54,7 +54,7 @@ class UserSeeder extends Seeder
             'cpfcnpj' => '14',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
-            'saldo' => '500'
+            'saldo' => '1000'
         ]);
         
         User::create([
@@ -64,7 +64,7 @@ class UserSeeder extends Seeder
             'cpfcnpj' => '21',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
-            'saldo' => '500'
+            'saldo' => '1000'
         ]);
         
         User::create([
@@ -74,7 +74,7 @@ class UserSeeder extends Seeder
             'cpfcnpj' => '22',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
-            'saldo' => '500'
+            'saldo' => '1000'
         ]);
         
         User::create([
@@ -84,7 +84,7 @@ class UserSeeder extends Seeder
             'cpfcnpj' => '23',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
-            'saldo' => '500'
+            'saldo' => '1000'
         ]);
         
         User::create([
@@ -94,7 +94,7 @@ class UserSeeder extends Seeder
             'cpfcnpj' => '24',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
-            'saldo' => '500'
+            'saldo' => '1000'
         ]);
        
         
