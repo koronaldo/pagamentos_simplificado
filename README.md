@@ -35,3 +35,9 @@ Pacotes  configurados
 "laravel/tinker": "^2.10.1",
 "livewire/flux": "^2.1.1",
 "livewire/volt": "^1.7.0"
+
+Para executar o projeto de usar os camandos
+
+php artisan serve
+
+npm run dev
