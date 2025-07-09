@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
+use App\Rules\CpfCnpj;
 
 new class extends Component {
     public string $name = '';
@@ -35,7 +36,7 @@ new class extends Component {
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
-
+            'cpfcnpj' => ['required', 'string'],
             'email' => [
                 'required',
                 'string',
@@ -43,9 +44,12 @@ new class extends Component {
                 'email',
                 'max:255',
                 Rule::unique(User::class)->ignore($user->id)
+             
             ],
         ]);
-
+       // dd($this->cpfcpnj);
+        $this->validateCpfCnpj($validated['cpfcnpj']);
+        
         $user->fill($validated);
 
         if ($user->isDirty('email')) {
@@ -56,6 +60,80 @@ new class extends Component {
 
         $this->dispatch('profile-updated', name: $user->name);
     }
+    
+    
+    private function validateCpfCnpj(string $cpfcnpj): void
+    {
+        $cpfcnpj = preg_replace('/\D/', '', $cpfcnpj); // Remove non-numeric characters
+        
+        if (strlen($cpfcnpj) === 11) {
+            // Validate CPF
+            if (!$this->isValidCpf($cpfcnpj)) {
+                throw \Illuminate\Validation\ValidationException::withMessages([
+                    'cpfcnpj' => __('CPF inválido.'),
+                ]);
+            }
+        } elseif (strlen($cpfcnpj) === 14) {
+            // Validate CNPJ
+            if (!$this->isValidCnpj($cpfcnpj)) {
+                throw \Illuminate\Validation\ValidationException::withMessages([
+                    'cpfcnpj' => __('CNPJ inválido.'),
+                ]);
+            }
+        } else {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'cpfcnpj' => __('CPF/CNPJ inválido. Deve conter 11 ou 14 dígitos.'),
+            ]);
+        }
+    }
+    
+    
+    private function isValidCpf(string $cpf): bool
+    {
+        // Check for invalid sequences
+        if (preg_match('/^(\d)\1{10}$/', $cpf)) {
+            return false;
+        }
+        
+        // Calculate verification digits
+        for ($t = 9; $t < 11; $t++) {
+            $d = 0;
+            for ($c = 0; $c < $t; $c++) {
+                $d += $cpf[$c] * (($t + 1) - $c);
+            }
+            $d = ((10 * $d) % 11) % 10;
+            if ($cpf[$c] != $d) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    private function isValidCnpj(string $cnpj): bool
+    {
+        // Check for invalid sequences
+        if (preg_match('/^(\d)\1{13}$/', $cnpj)) {
+            return false;
+        }
+        
+        // Calculate verification digits
+        $weights = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        for ($t = 12; $t < 14; $t++) {
+            $d = 0;
+            for ($c = 0; $c < $t; $c++) {
+                $d += $cnpj[$c] * $weights[$c];
+            }
+            $d = $d % 11 < 2 ? 0 : 11 - ($d % 11);
+            if ($cnpj[$c] != $d) {
+                return false;
+            }
+            array_unshift($weights, 6); // Adjust weights for the second digit
+        }
+        
+        return true;
+    }
+    
 
     /**
      * Send an email verification notification to the current user.
