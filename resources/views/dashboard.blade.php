@@ -18,6 +18,7 @@
 		<div
 			class="relative h-full overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
 			<livewire:transaction-list />
+			
 		</div>
 	</div>
 </div>

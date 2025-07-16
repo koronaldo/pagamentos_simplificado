@@ -18,6 +18,20 @@ class UserSeeder extends Seeder
         
         User::create([
             'name' => 'Cliente 1',
+            'email' => 'koronaldo@gmail.com',
+            'perfil' => 'cliente',
+            'cpfcnpj' => '1111111111',
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'),
+            'saldo' => '1000'
+        ]);
+        
+        User::factory(10)
+        //->hasUsers(3)
+        ->create();
+        /*
+        User::create([
+            'name' => 'Cliente 1',
             'email' => '1@cliente.com.br',
             'perfil' => 'cliente',
             'cpfcnpj' => '11',
@@ -97,7 +111,7 @@ class UserSeeder extends Seeder
             'saldo' => '1000'
         ]);
        
-        
+        */
         
     }
 }

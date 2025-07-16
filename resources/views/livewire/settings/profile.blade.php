@@ -34,8 +34,23 @@ new class extends Component {
         $user = Auth::user();
 
         $validated = $this->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'cpfcnpj' => ['required', 'string'],
+            'name' => [
+                'required',
+                'string',
+                'max:255'
+            ],
+            'cpfcnpj' => ['required',
+                'string'
+            ],
+            'perfil' => [
+                'required',
+                'in:lojista,cliente'
+            ],
+            'saldo' => [
+                'required',
+                'numeric',
+                'min:0'
+            ],
             'email' => [
                 'required',
                 'string',
@@ -43,10 +58,9 @@ new class extends Component {
                 'email',
                 'max:255',
                 Rule::unique(User::class)->ignore($user->id)
-             
             ],
         ]);
-       // dd($this->cpfcpnj);
+       
         $this->validateCpfCnpj($validated['cpfcnpj']);
         
         $user->fill($validated);
@@ -55,6 +69,7 @@ new class extends Component {
             $user->email_verified_at = null;
         }
 
+       // dd($user);
         $user->save();
 
         $this->dispatch('profile-updated', name: $user->name);

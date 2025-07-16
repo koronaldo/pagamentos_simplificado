@@ -1,45 +1,4 @@
-<?php
-use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Layout;
-use Livewire\Volt\Component;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use App\Models\Transaction;
 
-new #[Layout('components.layouts.transation-list')] class() extends Component {
-
-    public string $name;
-
-    public int $userId;
-
-    public function mount(): void
-    {
-        $user = Auth::user();
-        $this->name = $user->name;
-        $this->userId = $user->id;
-        $this->balance = $user->saldo;
-
-        $this->transactions = Transaction::
-            with('receiver')-> // carrega o user do receiver_id
-            with('sender')-> // carrega o user do Sender_id
-        where('sender_id', $user->id)
-            ->orWhere('receiver_id', $user->id)
-            ->orderByDesc('created_at')
-            ->take(10)
-            ->get();
-    }
-
-    public function render(): mixed
-    {
-        return view('livewire.transaction-list', [
-            'transactions' => $this->transactions
-        ]);
-    }
-
-    protected $listeners = [
-        'listTransactions' => 'mount'
-    ];
-}?>
 
 <div class="user-info">
 
